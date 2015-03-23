@@ -13,7 +13,7 @@
 #' @param inFiles A character vector with the full path of the SAM file(s)
 #' @param outFiles The names to give the output files. 
 #' If not specified, this will default to the same names as the input, but with the suffix .bam
-#' @param cl A cluster as defined by the package \code{snow}. If specified, the conversion will be run in parallel
+#' @param cl A cluster as defined by the package \code{parallel}. If specified, the conversion will be run in parallel
 #' @param exec The path to the samtools executable. Defaults to "/usr/bin/samtools". 
 #' This may vary depending on where you have installed \code{samtools}
 #' 

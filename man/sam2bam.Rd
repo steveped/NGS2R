@@ -14,7 +14,7 @@ sam2bam(inFiles, outFiles, cl = NULL, sort = TRUE, sortArgs = c(),
 \item{outFiles}{The names to give the output files.
 If not specified, this will default to the same names as the input, but with the suffix .bam}
 
-\item{cl}{A cluster as defined by the package \code{snow}. If specified, the conversion will be run in parallel}
+\item{cl}{A cluster as defined by the package \code{parallel}. If specified, the conversion will be run in parallel}
 
 \item{exec}{The path to the samtools executable. Defaults to "/usr/bin/samtools".
 This may vary depending on where you have installed \code{samtools}}

@@ -59,6 +59,7 @@ sam2bam <- function(inFiles, outFiles, cl=NULL, sort=TRUE, sortArgs=c(), sortPre
   if (length(fails)>0) warning("\nThe conversion has failed on:\n", inFiles[fails])
   
   if (sort){ # If sorted files are required
+    
     sortFiles <- gsub("bam", sortPre, outFiles)
     cmd <- paste(exec, "sort", sortArgs, outFiles, sortFiles)
     if (is.null(cl)) log <- sapply(cmd, FUN=system, intern=TRUE, USE.NAMES=FALSE)
@@ -69,23 +70,28 @@ sam2bam <- function(inFiles, outFiles, cl=NULL, sort=TRUE, sortArgs=c(), sortPre
       file.remove(outFiles)
       outFiles <- c()
     }
+    
+    if (index){ # Only apply this if sorting the files
+      cmd <- paste(exec, "index", paste(sortFiles, "bam", sep="."))
+      if (is.null(cl)) log <- sapply(cmd, FUN=system, intern=TRUE, USE.NAMES=FALSE)
+      else log <- parSapply(cl, cmd, system, intern=TRUE, USE.NAMES=FALSE)
+      fails <- which(unlist(log)==1)
+      if (length(fails)>0) warning("\nThe indexing has failed on:\n", sortFiles[fails])
+      indexFiles <- paste(sortFiles, "bam", "bai", sep=".")
+      fEx <- file.exists(indexFiles)
+      if (length(which(!fEx)) > 0) warning("\nError - The Index file cannot be found for:\n", indexFiles[!fEx])
+      indexFiles <- indexFiles[fEx]
+    }
+    
+    return(list(inFiles = inFiles, unsorted = outFiles, sorted=paste(sortFiles, "bam", sep="."), indexFiles=indexFiles))
+    
   }
-  
-  if (index){
-    cmd <- paste(exec, "index", paste(sortFiles, "bam", sep="."))
-    if (is.null(cl)) log <- sapply(cmd, FUN=system, intern=TRUE, USE.NAMES=FALSE)
-    else log <- parSapply(cl, cmd, system, intern=TRUE, USE.NAMES=FALSE)
-    fails <- which(unlist(log)==1)
-    if (length(fails)>0) warning("\nThe indexing has failed on:\n", sortFiles[fails])
-    indexFiles <- paste(sortFiles, "bam", "bai", sep=".")
-    fEx <- file.exists(indexFiles)
-    if (length(which(!fEx)) > 0) warning("\nError - The Index file cannot be found for:\n", indexFiles[!fEx])
-    indexFiles <- indexFiles[fEx]
+  else {
+    return(list(inFiles = inFiles, unsorted = outFiles))
   }
-  
-  return(list(inFiles = inFiles, unsorted = outFiles, sorted=paste(sortFiles, "bam", sep="."), indexFiles=indexFiles))
   
 }
+
 # cl <- makeCluster(8, type = "SOCK")
 # test <- list.files(file.path("/home", "steveped", "Documents", "Barry", "iClip", "alignments"), pattern=".sam",full.names=TRUE)
 # out <- sam2bam(test, cl=cl, index=FALSE)

@@ -14,6 +14,7 @@
 #' @author Steve Pederson <stephen.pederson@@adelaide.edu.au>
 #' @import dplyr
 
+
 #' @rdname fqcBasic
 #' @export
 fqcBasic <- function(fqNames, qcDir){

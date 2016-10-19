@@ -12,7 +12,7 @@
 
 #' @rdname cutadaptPairedSummary
 #' @export
-cutadaptPairedSummary <- function(x) {
+readCutadaptPairedLogs <- function(x) {
   
   ## Checks need to be added here to make sure it actually is a log file
   

@@ -19,7 +19,7 @@
 #' @rdname alignSummarySTAR
 #' 
 #' @export
-alignSummarySTAR <- function(logFiles, logPath, pattern="Log.final.out"){
+readSTARLogs <- function(logFiles, logPath, pattern="Log.final.out"){
   
   if (missing(logFiles)){
     if(!file.exists(logPath)) stop("\nCannot find the specified path:\n", logPath)

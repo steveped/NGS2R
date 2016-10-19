@@ -7,13 +7,14 @@ Author: Steve Pederson
 Maintainer: <stephen.pederson@adelaide.edu.au>
 Description: Simplifies access to many commonly used NGS tols and commands
 Depends:
-  ggplot2,
-  dplyr,
-  reshape2,
-  parallel
-Imports: 
-  reshape2, 
-  dplyr, 
-  ggplot2,
-  parallel
+    ggplot2,
+    dplyr,
+    reshape2,
+    parallel
+Imports:
+    reshape2,
+    dplyr,
+    ggplot2,
+    parallel
 License: GPL-3
+RoxygenNote: 5.0.1

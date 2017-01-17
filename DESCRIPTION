@@ -1,8 +1,8 @@
 Package: NGS2R
 Type: Package
-Title: Provides access to some common NGS tools from within R
-Version: 0.1
-Date: 2015-01-07
+Title: Provides access to some common NGS log files from within R
+Version: 0.1.1
+Date: 2017-01-17
 Author: Steve Pederson
 Maintainer: <stephen.pederson@adelaide.edu.au>
 Description: Simplifies access to many commonly used NGS tols and commands
